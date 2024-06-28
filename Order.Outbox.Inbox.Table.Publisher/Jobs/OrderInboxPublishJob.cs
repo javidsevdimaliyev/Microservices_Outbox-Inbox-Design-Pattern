@@ -15,7 +15,7 @@ namespace Order.Outbox.Inbox.Table.Publisher.Service.Jobs
             {
                 OrderSingletonDatabase.DataReaderBusy();
                
-                List<OrderInbox> orderInboxes = (await OrderSingletonDatabase.QueryAsync<OrderInbox>($@"SELECT * FROM ORDERINBOXES WHERE ISPOCESSED = 0")).ToList();
+                List<OrderInbox> orderInboxes = (await OrderSingletonDatabase.QueryAsync<OrderInbox>($@"SELECT * FROM ORDERINBOXES WHERE ISPROCESSED = 0")).ToList();
 
                 foreach (var orderOutbox in orderInboxes)
                 {                  
@@ -23,7 +23,7 @@ namespace Order.Outbox.Inbox.Table.Publisher.Service.Jobs
                     if (orderCreatedEvent != null)
                     {
                         await publishEndpoint.Publish(orderCreatedEvent);
-                        OrderSingletonDatabase.ExecuteAsync($"UPDATE ORDERINBOXES SET ISPOCESSED = 0 WHERE IdempotentToken = '{orderOutbox.IdempotentToken}'");
+                        OrderSingletonDatabase.ExecuteAsync($"UPDATE ORDERINBOXES SET ISPROCESSED = 0 WHERE IdempotentToken = '{orderOutbox.IdempotentToken}'");
                         Console.WriteLine($"Stock operations of the order corresponding to the order id value {orderCreatedEvent.OrderId} have been successfully completed.");
                     }                   
                 }
