@@ -1,8 +1,8 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Order.Outbox.Inbox.Table.Publisher.Models.Context;
 using Shared.Events;
 using System.Text.Json;
+using Order.Outbox.Inbox.Table.Publisher.Models.Context;
 
 namespace Stock.Service.Consumers
 {

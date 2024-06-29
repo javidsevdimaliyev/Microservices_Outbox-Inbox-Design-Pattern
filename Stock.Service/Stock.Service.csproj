@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Order.Outbox.Inbox.Table.Publisher\Order.Outbox.Inbox.Table.Publisher.csproj" />
     <ProjectReference Include="..\Order.Outbox.Table.Publisher\Order.Outbox.Inbox.Table.Publisher.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
